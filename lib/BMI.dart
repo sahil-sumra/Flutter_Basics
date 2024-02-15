@@ -1,104 +1,102 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/splashpage.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple),
       ),
-      home: SplashPage(),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({
-    super.key,
-  });
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var wtController = TextEditingController();
-  var ftController = TextEditingController();
-  var inController = TextEditingController();
-  var result = '';
+  TextEditingController wtController = TextEditingController();
+  TextEditingController ftController = TextEditingController();
+  TextEditingController inController = TextEditingController();
 
-  var bgColor;
+  Color? bgColor;
+  String result = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text('my home page'),
+        backgroundColor: Color.fromARGB(255, 100, 74, 167),
+        title: Text('BMI APP'),
       ),
       body: Container(
         color: bgColor,
+        padding: const EdgeInsets.all(16.0),
         child: Center(
           child: Container(
             width: 300,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 30),
-                    child: Text(
-                      'BMI APP',
-                      style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.w500,
-                      ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 30),
+                  child: Text(
+                    'BMI APP',
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
                 TextField(
                   controller: wtController,
                   decoration: InputDecoration(
-                      labelText: "Enter Your Height  (ft.)",
-                      prefixIcon: Icon(Icons.line_weight_outlined),
-                      border: OutlineInputBorder(gapPadding: 10)),
-                  keyboardType: TextInputType.numberWithOptions(decimal: false),
+                    labelText: "Enter Your Weight (kg)",
+                    prefixIcon: Icon(Icons.line_weight_outlined),
+                    border: OutlineInputBorder(
+                      gapPadding: 10,
+                    ),
+                  ),
+                  keyboardType: TextInputType.number,
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
                 TextField(
                   controller: ftController,
                   decoration: InputDecoration(
-                      labelText: "Enter Your Height  (ft.)",
-                      prefixIcon: Icon(Icons.height),
-                      border: OutlineInputBorder(gapPadding: 10)),
-                  keyboardType: TextInputType.numberWithOptions(decimal: false),
+                    labelText: "Enter Your Height (ft.)",
+                    prefixIcon: Icon(Icons.height),
+                    border: OutlineInputBorder(
+                      gapPadding: 10,
+                    ),
+                  ),
+                  keyboardType: TextInputType.number,
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
                 TextField(
                   controller: inController,
                   decoration: InputDecoration(
-                      labelText: "Enter Your Height  (Inches.)",
-                      prefixIcon: Icon(Icons.height),
-                      border: OutlineInputBorder(gapPadding: 10)),
-                  keyboardType: TextInputType.numberWithOptions(decimal: false),
+                    labelText: "Enter Your Height (Inches)",
+                    prefixIcon: Icon(Icons.height),
+                    border: OutlineInputBorder(
+                      gapPadding: 10,
+                    ),
+                  ),
+                  keyboardType: TextInputType.number,
                 ),
-                SizedBox(
-                  height: 21,
-                ),
+                SizedBox(height: 21),
                 ElevatedButton(
                   onPressed: () {
                     var wt = wtController.text.toString();
@@ -106,22 +104,21 @@ class _MyHomePageState extends State<MyHomePage> {
                     var inch = inController.text.toString();
 
                     if (wt != '' && ft != '' && inch != '') {
-                      // Bmi Calculation
                       var iWt = int.parse(wt);
                       var iFt = int.parse(ft);
                       var iInch = int.parse(inch);
 
                       var totalInch = (iFt * 12) + iInch;
-                      var totalcm = totalInch * 2.54;
-                      var total_m = totalcm / 100;
-                      var bmivalue = iWt / (total_m * total_m);
+                      var totalCm = totalInch * 2.54;
+                      var totalM = totalCm / 100;
+                      var bmiValue = iWt / (totalM * totalM);
                       var msg = '';
 
-                      if (bmivalue > 25) {
-                        msg = 'You Are OverWight';
+                      if (bmiValue > 25) {
+                        msg = 'You Are Overweight';
                         bgColor = Colors.orange.shade200;
-                      } else if (bmivalue < 18) {
-                        msg = 'You Have Underweight';
+                      } else if (bmiValue < 18) {
+                        msg = 'You Are Underweight';
                         bgColor = Colors.red.shade300;
                       } else {
                         msg = "Your Body Mass Index is Normal";
@@ -130,26 +127,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
                       setState(() {
                         result =
-                            '$msg \n Your BMI value Is ${bmivalue.toStringAsFixed(2)}';
+                            '$msg\nYour BMI value Is ${bmiValue.toStringAsFixed(2)}';
                       });
                     } else {
                       setState(() {
-                        result = "please enter all the fields";
+                        result = "Please enter all the fields";
                       });
                     }
                   },
                   child: Text('Calculate'),
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.deepPurple),
-                      foregroundColor: MaterialStateProperty.all(Colors.white)),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: 10),
                 Text(
                   result,
-                  style: TextStyle(fontSize: 20, fontFamily: 'singleday'),
+                  style: TextStyle(fontSize: 20),
                 )
               ],
             ),

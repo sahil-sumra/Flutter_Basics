@@ -46,19 +46,21 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text('my home page'),
         ),
         body: Center(
-          child: RangeSlider(
-              values: values,
-              labels: labels,
-              divisions: 10,
-              activeColor: Colors.green,
-              inactiveColor: Colors.green.shade300,
-              min: 0,
-              max: 100,
-              onChanged: (newValues) {
-                values = newValues;
-                print('${newValues.start}, ${newValues.end}');
-                setState(() {});
-              }),
+          child: Container(
+            child: RangeSlider(
+                values: values,
+                labels: labels,
+                divisions: 10,
+                activeColor: Colors.green,
+                inactiveColor: Colors.green.shade300,
+                min: 0,
+                max: 100,
+                onChanged: (newValues) {
+                  values = newValues;
+                  print('${newValues.start}, ${newValues.end}');
+                  setState(() {});
+                }),
+          ),
         ));
   }
 }

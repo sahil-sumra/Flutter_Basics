@@ -1,5 +1,5 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/callBack.dart';
 import 'package:flutter_application_2/main.dart';
 
 class IntroPage extends StatelessWidget {
@@ -21,13 +21,11 @@ class IntroPage extends StatelessWidget {
             ),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => MyHomePage(
-                          title: 'home',
-                        ),
-                      ));
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: ((context) {
+                      return MyHomePage();
+                    }),
+                  ));
                 },
                 child: Text('Next')),
           ],

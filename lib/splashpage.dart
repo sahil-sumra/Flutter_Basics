@@ -13,8 +13,8 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     Timer(Duration(seconds: 5), () {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => MyHomePage(title: 'sahil')));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => MyHomePage()));
       print('Home Screen lounching..');
     });
   }

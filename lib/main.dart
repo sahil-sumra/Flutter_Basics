@@ -41,26 +41,22 @@ class _MyHomePageState extends State<MyHomePage> {
     RangeLabels labels =
         RangeLabels(values.start.toString(), values.end.toString());
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text('my home page'),
-        ),
-        body: Center(
-          child: Container(
-            child: RangeSlider(
-                values: values,
-                labels: labels,
-                divisions: 10,
-                activeColor: Colors.green,
-                inactiveColor: Colors.green.shade300,
-                min: 0,
-                max: 100,
-                onChanged: (newValues) {
-                  values = newValues;
-                  print('${newValues.start}, ${newValues.end}');
-                  setState(() {});
-                }),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text('my home page'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'BMI APP',
+            style: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.w500,
+            ),
           ),
-        ));
+        ],
+      ),
+    );
   }
 }

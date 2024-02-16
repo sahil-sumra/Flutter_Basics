@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 100, 74, 167),
+        backgroundColor: Color.fromARGB(255, 154, 112, 227),
         title: Text('BMI APP'),
       ),
       body: Container(
@@ -49,10 +49,10 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Container(
             width: 300,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 30),
+                  padding: const EdgeInsets.only(bottom: 20),
                   child: Text(
                     'BMI APP',
                     style: TextStyle(
@@ -117,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       if (bmiValue > 25) {
                         msg = 'You Are Overweight';
                         bgColor = Colors.orange.shade200;
-                      } else if (bmiValue < 18) {
+                      } else if (bmiValue < 18.5) {
                         msg = 'You Are Underweight';
                         bgColor = Colors.red.shade300;
                       } else {

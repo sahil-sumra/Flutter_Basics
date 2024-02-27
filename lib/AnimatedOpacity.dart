@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,13 +28,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool isFirst = true;
-  @override
-  void reload() {
-    setState(() {
-      isFirst = false;
-    });
-  }
+  var myOpacity = 1.0;
+  var flag = true;
 
   @override
   Widget build(BuildContext context) {
@@ -47,25 +40,33 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AnimatedCrossFade(
-              firstChild: Container(
+            AnimatedOpacity(
+              opacity: myOpacity,
+              duration: Duration(
+                seconds: 1,
+              ),
+              curve: Curves.decelerate,
+              child: Container(
                 width: 200,
                 height: 100,
-                color: const Color.fromARGB(255, 53, 42, 3),
+                color: Colors.blueAccent,
               ),
-              secondChild: Image.asset('assets/images/download.jfif'),
-              crossFadeState: isFirst
-                  ? CrossFadeState.showFirst
-                  : CrossFadeState.showSecond,
-              duration: Duration(seconds: 2),
             ),
             ElevatedButton(
-              onPressed: () {
-                reload();
-              },
-              child: Text('change'),
-            ),
+                onPressed: () {
+                  setState(() {
+                    if (flag) {
+                      myOpacity = 0.0; // invisible
+                      flag = false;
+                    } else {
+                      myOpacity = 1.0; // visible
+                      flag = true;
+                    }
+                  });
+                },
+                child: Text('Close'))
           ],
         ),
       ),

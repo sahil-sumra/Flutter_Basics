@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        useMaterial3: true,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple),
       ),
       home: MyHomePage(),
     );
@@ -30,14 +28,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool isFirst = true;
-  @override
-  void reload() {
-    setState(() {
-      isFirst = false;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,27 +36,12 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text('Home Page'),
       ),
       body: Center(
-        child: Column(
-          children: [
-            AnimatedCrossFade(
-              firstChild: Container(
-                width: 200,
-                height: 100,
-                color: const Color.fromARGB(255, 53, 42, 3),
-              ),
-              secondChild: Image.asset('assets/images/download.jfif'),
-              crossFadeState: isFirst
-                  ? CrossFadeState.showFirst
-                  : CrossFadeState.showSecond,
-              duration: Duration(seconds: 2),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                reload();
-              },
-              child: Text('change'),
-            ),
-          ],
+        child: Text(
+          'Hello <Flutter>!!',
+          style: TextStyle(
+            fontSize: 40,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
